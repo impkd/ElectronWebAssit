@@ -1,0 +1,16 @@
+{
+  "name": "WebAsisst",
+  "version": "1.0.0",
+  "description": "【】",
+  "main": "./_main.js",
+  "scripts": {},
+  "keywords": [
+    "Electron",
+    "WebAsisst",
+    "client"
+  ],
+  "author": "pkd",
+  "devDependencies": {},
+  "dependencies": {
+  }
+}
