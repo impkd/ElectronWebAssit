@@ -1,9 +1,11 @@
 
 (function () {console.log('start insert platAjax.js');
 
+
     if(!window.hasOwnProperty('$_$')){window.$_$ = window.$ || {};}
 
     var $_$ = window.$_$;
+    $_$.goodLookChars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
 
     $_$.DEST_ID = {
         APP:-1,

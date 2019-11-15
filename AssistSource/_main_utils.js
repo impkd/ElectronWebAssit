@@ -10,6 +10,8 @@ var urlMod = require('url');
 var path = require('path');
 var fs = require("fs");
 
+utils.$chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+
 utils.removeUpper = function (str) {
     return str.replace(/[A-Z]/gm, '');
 };
@@ -123,14 +125,57 @@ utils.switchInStr = function (val, a, b) {
 
 utils.randomString = function (len) {
     len = len || 32;
-    var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
-    var maxPos = $chars.length;
+    var maxPos = utils.$chars.length;
     var pwd = '';
     for (var i = 0; i < len; i++) {
-        pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+        pwd += utils.$chars.charAt(Math.floor(Math.random() * maxPos));
     }
     return pwd;
 };
+
+utils.idToStrEx = function (_id) {
+    var id = parseInt(_id);
+    var bLen = utils.$chars.length;
+    var ret = '';
+    while(id > 0){
+        ret += utils.$chars.charAt(id % bLen);
+        id = parseInt(id / bLen);
+    }
+    return ret;
+};
+
+utils.strToIdEx = function (str) {
+    var bLen = utils.$chars.length;
+    var ret = 0;
+    for(var i = str.length - 1; i >= 0; --i){
+        var c = str[i];
+        var pos = utils.$chars.indexOf(c);
+        if(pos < 0) pos = 0;
+        ret *= bLen;
+        ret += pos;
+    }
+    return ret;
+};
+utils.posiSum = function (str) {
+    var ret = 0;
+    for(var i = str.length - 1; i >= 0; --i){
+        var c = str[i];
+        var pos = utils.$chars.indexOf(c);
+        if(pos < 0) pos = 0;
+        ret += (pos + i);
+    }
+    return ret;
+};
+utils.charCodeSum = function (str) {
+    var ret = 0;
+    for(var i = str.length - 1; i >= 0; --i){
+        var pos = str.charCodeAt(i);
+        if(pos < 0) pos = 0;
+        ret += pos;
+    }
+    return ret;
+};
+
 /**
  * 分析URL，可以解出类似协议(http)，参数等。必须是标准的URL。
  */

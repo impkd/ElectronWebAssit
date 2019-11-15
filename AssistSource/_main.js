@@ -101,7 +101,7 @@ app.allowSleep = function() {
 };
 
 var gotTheLock = false;
-if(app.makeSingleInstance){ //app.requestSingleInstanceLock
+if(app.makeSingleInstance){
     var shouldQuit = app.makeSingleInstance(function (commandLine, workingDirectory) {
 
     });
